@@ -1,0 +1,36 @@
+library(ggplot2)
+data("diamonds") #cut, price
+
+#Histogram, Price by cut
+ggplot(diamonds, aes(x=price))+
+    geom_histogram(binwidth = 500)+
+    facet_grid(cut~.)
+
+# 'fBasic' package --------------------------------------------------------
+
+install.packages('fBasics')
+library(fBasics)
+#skewness
+skewness(diamonds$price)
+with(diamonds, tapply(price, cut, skewness))
+
+#kurtosis
+kurtosis(diamonds$price)
+with(diamonds, tapply(price, cut, kurtosis))
+
+hist(diamonds$price[which(diamonds$cut == 'Fair')])
+# 'moments' package -------------------------------------------------------
+
+install.packages('moments')
+library(moments)
+
+skewness(diamonds$price)
+kurtosis(diamonds$price)
+
+# 'psych' package ---------------------------------------------------------
+
+install.packages('psych')
+library(psych)
+
+skew(diamonds$price)
+kurtosi(diamonds$price)
